@@ -25,10 +25,20 @@ package
 			container = new Sprite();
 			container.x = TOOLBAR_OFFSET;
 			addChild(container);
+			container.addEventListener(MouseEvent.CLICK, handleContainerClick);
 			addEventListener(Event.ENTER_FRAME, update);
 			initToolbar();
 			generateEmptyMap();
 			buildMap();
+		}
+		
+		private function handleContainerClick(e:MouseEvent):void 
+		{
+			var xPos:int = (50 + mouseX) / TILE_SIZE;
+			xPos -= 3;
+			if (xPos == 15)		xPos = 14;
+			var yPos:int = mouseY / TILE_SIZE;
+			container.removeChild(tileMap[yPos][xPos]);
 		}
 		
 		private function initToolbar():void 
